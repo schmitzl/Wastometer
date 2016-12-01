@@ -1,0 +1,93 @@
+html, body{
+	  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 100%;
+    font-weight: 100;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#18c9d2+0,18699b+32,09415c+45,09415c+45,08364e+70,08364e+71,07304e+74,07304e+88,07304e+88,062b46+100,153854+100,153854+100,062b46+100 */
+}
+
+html {
+}
+
+body {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    width: 100%;
+}
+body a {
+	transition:0.5s all;
+	-webkit-transition:0.5s all;
+	-moz-transition:0.5s all;
+	-o-transition:0.5s all;
+	-ms-transition:0.5s all;
+}
+a:hover{
+ text-decoration:none;
+}
+
+h1,h2,h3,h4,h5,h6{
+ margin:0;
+    font-weight: 100;
+}
+
+p{
+	margin:0;
+}
+
+ul{
+	margin:0;
+	padding:0;
+}
+
+label{
+	margin:0;
+}
+
+#header {
+    background-color: #58b7a7;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    font-family: 'Chivo', sans-serif;
+}
+
+#date {
+    
+    text-align: right;
+    padding-right: 10px;
+}
+
+#main {
+    text-align: center;
+}
+
+#waste-info {
+    margin-top: 40px;
+    font-size: 22pt;
+} 
+
+#waste-number-description {
+    text-align: right;
+    margin-top: 60px;
+    margin-left: 60px;
+    margin-right: -60px;
+}
+
+#number-wasted-portions {
+    color: #d71e1e;
+    font-size: 200pt;
+    margin-top: -100px;
+}
+
+#additional-waste-info {
+    text-align: left;
+    margin-top: 40px;
+    margin-left: -60px;
+    margin-right: 60px;
+}
+
+#dynamic-info {
+    padding: 50px;
+    background-color: #58b7a7;
+    margin-top: 80px;
+}
