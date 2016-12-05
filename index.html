@@ -7,23 +7,23 @@
 <meta name="keywords" content="wastometer" />
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />	
+<link href="css/style.css" rel='stylesheet' type='text/css' />  
 <script src="js/jquery-1.11.1.min.js"></script>
 <!--webfonts-->
- <link href='//fonts.googleapis.com/css?family=Poiret+One|Lily+Script+One|Raleway:400,300,500,600,200,700' rel='stylesheet' type='text/css'>
-<link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">
+ <!--<link href='//fonts.googleapis.com/css?family=Poiret+One|Lily+Script+One|Raleway:400,300,500,600,200,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">-->
 <!--//webfonts-->
 </head>
 <body>
 <!--start-home-->
-            <div id="header">	
-				<h1>Wast-o-meter</h1>
-			</div>
+            <div id="header">   
+                <h1>Wast-o-meter</h1>
+            </div>
             <div id="date">
                 Thursday
             </div>
     
-		 <div id="main">	
+         <div id="main">    
 
              <img src="images/donut.png"/>
 
@@ -37,17 +37,37 @@
                     <div id="additional-waste-info" class="col-md-3">
                         portions<br>
                         equals<br>
-                        asds<br>
+                        <span id="price">(price)</span>kr <span id="weight">(weight)</span>kg<br>
                     </div>
                 </div>
              </div>
              
              <div id="dynamic-info">
-                
+                <button class="btn btn-info" onclick="addWeight(1000)">Add Weight</button>
              </div>
-		
-			 	
+        
+                
         </div>
 
 </body>
 </html>
+
+<script>
+
+var weight = 0;
+
+function addWeight(data) {
+    weight += data;
+    CalculatePortions(weight);
+}
+
+function CalculatePortions(weight)
+{
+   var portions = weight/500;
+   document.getElementById("number-wasted-portions").innerHTML = portions;
+   document.getElementById("price").innerHTML = portions*60;
+   document.getElementById("weight").innerHTML = weight/1000;
+}
+
+CalculatePortions(10000);
+</script>
