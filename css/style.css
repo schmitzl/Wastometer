@@ -91,3 +91,13 @@ label{
     background-color: #58b7a7;
     margin-top: 80px;
 }
+
+.axis--x path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
