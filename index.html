@@ -29,22 +29,38 @@
 
              <div id="waste-info">
                 <div class="row">
-                    <div id="waste-number-description" class="col-md-3">
+                    <!--div id="waste-number-description" class="col-md-3">
                         Wasted food <br>
                         this week
-                    </div>
-                    <div id="number-wasted-portions" class="col-md-6">200</div>
-                    <div id="additional-waste-info" class="col-md-3">
+                    </div-->
+                    <div id="price-holder" class="text col-md-3">
+                         <span id="price">0</span>kr
+                     </div>
+                     
+                    <div id="number-wasted-portions" class="col-md-6">0</div>
+
+                    <div id="weight-holder" class="text col-md-3">
+                         <span id="weight">0</span>kg
+                     </div>
+                    <!--div id="additional-waste-info" class="col-md-3">
                         portions<br>
-                        equals<br>
-                        <span id="price">(price)</span>kr <span id="weight">(weight)</span>kg<br>
-                    </div>
+                    </div-->
                 </div>
              </div>
-             
-             <div id="dynamic-info">
-                <button class="btn btn-info" onclick="addWeight(1000)">Add Weight</button>
+             <div class="row">
+                <div id="dynamic-info" class="col-md-12">Portions wasted this week </div>
+                 <!--div id="price-holder" class="text col-md-2">
+                     <span id="price">0</span>kr
+                 </div>
+                 <div id="weight-holder" class="text col-md-2">
+                     <span id="weight">0</span>kg
+                 </div>
+                 <div class="col-md-4"></div-->
              </div>
+
+             <!--div id="dynamic-info">
+                <button id="btnZ" class="btn btn-info" onclick="addWeight(1000)">Add Weight</button>
+             </div-->
         
                 
         </div>
@@ -57,7 +73,10 @@
 var weight = 0;
 
 function addWeight(data) {
-    weight += data;
+    if(weight+data >= 0) {
+        weight += data;
+    }
+    
     CalculatePortions(weight);
 }
 
@@ -65,9 +84,33 @@ function CalculatePortions(weight)
 {
    var portions = weight/500;
    document.getElementById("number-wasted-portions").innerHTML = portions;
-   document.getElementById("price").innerHTML = portions*60;
-   document.getElementById("weight").innerHTML = weight/1000;
+   var price = portions*60;
+   var kgs = weight/1000;
+   document.getElementById("price").innerHTML = price.toFixed(0);
+   document.getElementById("weight").innerHTML = kgs.toFixed(2);
 }
+
+function clicked (amount) {
+    addWeight(amount);
+    //some code
+}
+document.onkeydown = function (e) {
+    var keyCode = e.keyCode;
+    if(keyCode == 90) {
+        clicked(-500);
+    }
+    if(keyCode == 88) {
+        clicked(-100);
+    }
+    if(keyCode == 67) {
+        clicked(100);
+    }
+    if(keyCode == 86) {
+        clicked(500);
+    }
+};
+
+//btnZ.onclick = clicked;
 
 </script>
 

@@ -48,6 +48,7 @@ label{
     padding: 20px;
     color: white;
     text-align: center;
+    font-size: 64pt;
     font-family: 'Chivo', sans-serif;
 }
 
@@ -81,15 +82,18 @@ label{
 
 #additional-waste-info {
     text-align: left;
+    color: #d71e1e;
+    font-size: 120pt;
     margin-top: 40px;
     margin-left: -60px;
     margin-right: 60px;
 }
 
 #dynamic-info {
-    padding: 50px;
-    background-color: #58b7a7;
-    margin-top: 80px;
+    padding: 30px;
+    margin-top: 0px;
+    font-size: 48pt;
+    color: #d71e1e;
 }
 
 .axis--x path {
@@ -99,5 +103,18 @@ label{
 .line {
   fill: none;
   stroke: steelblue;
-  stroke-width: 1.5px;
+  stroke-width: 3px;
+}
+
+.text {
+    font-size: 64pt;
+
+}
+
+#price-holder {
+    background-color: #afe;
+}
+
+#weight-holder {
+    background-color: #a85;
 }
