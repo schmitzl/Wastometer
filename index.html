@@ -231,7 +231,7 @@ var text = svg.append("text")
       .attr("dx", function(d){ return width/2})
       .style("text-anchor", "middle")
       .attr("class", "inside")
-      .text(function(d) { return 'Below '+maxPortions+' = Free desert'; });
+      .text(function(d) { return 'Below '+maxPortions+' = Free dessert'; });
 
 function render(){
   // generate new random data
@@ -253,7 +253,7 @@ function render(){
     .innerRadius(iRadius*0);
     text = svg.selectAll("text")
         .attr("class", "error")
-        .text(function(d) {return 'No free desert this week!'});
+        .text(function(d) {return 'No free dessert this week!'});
   }
   // remove data not being used
   g.datum(data).selectAll("path")
