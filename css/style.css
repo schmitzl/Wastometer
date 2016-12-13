@@ -75,9 +75,9 @@ label{
 }
 
 #number-wasted-portions {
-    color: #d71e1e;
+    color: #cb3752;
     font-size: 200pt;
-    margin-top: -100px;
+    margin-top: -120px;
 }
 
 #additional-waste-info {
@@ -90,10 +90,10 @@ label{
 }
 
 #dynamic-info {
-    padding: 30px;
+    padding: 0px;
     margin-top: 0px;
     font-size: 48pt;
-    color: #d71e1e;
+    color: #cb3752;
 }
 
 .axis--x path {
@@ -108,13 +108,24 @@ label{
 
 .text {
     font-size: 64pt;
-
 }
 
 #price-holder {
-    background-color: #afe;
+    background-color: #eee;
 }
 
 #weight-holder {
-    background-color: #a85;
+    background-color: #eee;
+}
+
+.inside {
+    font-family: 'Chivo', sans-serif;
+
+    font-size:28px;
+}
+
+.error {
+    font-family: 'Chivo', sans-serif;
+
+    font-size:72px;
 }

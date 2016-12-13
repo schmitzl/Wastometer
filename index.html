@@ -7,17 +7,21 @@
 <meta name="keywords" content="wastometer" />
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />  
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+
 <script src="js/jquery-1.11.1.min.js"></script>
 <!--webfonts-->
  <!--<link href='//fonts.googleapis.com/css?family=Poiret+One|Lily+Script+One|Raleway:400,300,500,600,200,700' rel='stylesheet' type='text/css'>
 <link href="https://fonts.googleapis.com/css?family=Chivo" rel="stylesheet">-->
 <!--//webfonts-->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 <body>
 <!--start-home-->
             <div id="header">   
-                <h1>Wast-o-meter</h1>
+                <h1>Wast-o-meter<span class="glyphicon glyphicon-scale"></span></h1>
             </div>
             <div id="date">
                 Thursday
@@ -25,7 +29,8 @@
     
          <div id="main">    
 
-             <img src="images/donut.png"/>
+             <!--img src="images/donut.png"/-->
+             <div id="donut"></div>
 
              <div id="waste-info">
                 <div class="row">
@@ -33,14 +38,18 @@
                         Wasted food <br>
                         this week
                     </div-->
-                    <div id="price-holder" class="text col-md-3">
-                         <span id="price">0</span>kr
+                    <div id="price-holder" class="text col-md-4">
+                         
+                         <span id="price">0</span>kr 
+                         <span class="glyphicon glyphicon glyphicon-piggy-bank" style="vertical-align:-8px"></span>
                      </div>
                      
-                    <div id="number-wasted-portions" class="col-md-6">0</div>
+                    <div id="number-wasted-portions" class="col-md-4">0</div>
 
-                    <div id="weight-holder" class="text col-md-3">
-                         <span id="weight">0</span>kg
+                    <div id="weight-holder" class="text col-md-4">
+                         
+                          <span class="glyphicon glyphicon-scale" style="vertical-align:-8px"></span>
+                          <span id="weight">0</span>kg
                      </div>
                     <!--div id="additional-waste-info" class="col-md-3">
                         portions<br>
@@ -84,49 +93,51 @@ function CalculatePortions(weight)
 {
    var portions = weight/500;
    document.getElementById("number-wasted-portions").innerHTML = portions;
+   document.getElementById("portiondata").value = portions;
    var price = portions*60;
    var kgs = weight/1000;
    document.getElementById("price").innerHTML = price.toFixed(0);
    document.getElementById("weight").innerHTML = kgs.toFixed(2);
 }
 
-function clicked (amount) {
-    addWeight(amount);
-    //some code
-}
 document.onkeydown = function (e) {
     var keyCode = e.keyCode;
     if(keyCode == 90) {
-        clicked(-500);
+        addWeight(-500);
     }
     if(keyCode == 88) {
-        clicked(-100);
+        addWeight(-100);
     }
     if(keyCode == 67) {
-        clicked(100);
+        addWeight(100);
     }
     if(keyCode == 86) {
-        clicked(500);
+        addWeight(500);
     }
 };
-
-//btnZ.onclick = clicked;
 
 </script>
 
 <!-- D3 -->
 
+<div>
+  <input type="hidden" id="portiondata" value="0"></input>
+  <input type="hidden" id="datacount" onkeyup="render()" value="2" name="datapoints"></input>
+</div>
+
 <svg width="960" height="500"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
+
 <script>
 
 //var weights = [10,11,20,30,43,24];
 
-var svg = d3.select("svg"),
+
+var svg1 = d3.select("svg"),
     margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = +svg.attr("width") - margin.left - margin.right,
-    height = +svg.attr("height") - margin.top - margin.bottom,
-    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    width = +svg1.attr("width") - margin.left - margin.right,
+    height = +svg1.attr("height") - margin.top - margin.bottom,
+    g = svg1.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var parseTime = d3.timeParse("%d-%b-%y");
 
@@ -171,5 +182,102 @@ d3.tsv("data.tsv", function(d) {
       .attr("class", "line")
       .attr("d", line);
 });
+
+
+//DONUT THINGY
+var maxPortions = 80;
+
+var width = 960,
+    height = 500 - 29; // adjust for height of input bar div
+//var color = d3.scale.category20();
+var color = ['#cb3752','#dee']; //nice color -> #FFcc00
+// draw and append the container
+var svg = d3.select("#donut").append("svg")
+  .attr("width", width).attr("height", height);
+
+// set the thickness of the inner and outer radii
+var min = Math.min(width, height);
+var oRadius = min / 2 * 0.9;
+var iRadius = min / 2 * 0;
+// construct default pie laoyut
+var pie = d3.pie().value(function(d){ return d; }).sort(null);
+// construct arc generator
+var arc = d3.arc()
+  .outerRadius(oRadius)
+  .innerRadius(iRadius);
+// creates the pie chart container
+var g = svg.append('g')
+var g = svg.append('g')
+  .attr('transform', function(){
+    if ( window.innerWidth >= 960 ) var shiftWidth = width / 2;
+    if ( window.innerWidth < 960 ) var shiftWidth = width / 3;
+    return 'translate(' + shiftWidth + ',' + height / 2 + ')';
+  })
+
+// generate random data
+var data = makeData(+document.getElementById("datacount").value,0);
+
+// enter data and draw pie chart
+var path = g.datum(data).selectAll("path")
+  .data(pie)
+  .enter().append("path")
+    .attr("class","piechart")
+    .attr("fill", function(d,i){ return color[i]; })
+    .attr("d", arc)
+    .each(function(d){ this._current = d; })
+
+var text = svg.append("text")
+      .attr("dy", function(d){ return height/2})
+      .attr("dx", function(d){ return width/2})
+      .style("text-anchor", "middle")
+      .attr("class", "inside")
+      .text(function(d) { return 'Below '+maxPortions+' = Free desert'; });
+
+function render(){
+  // generate new random data
+  data = makeData(+document.getElementById("datacount").value, +document.getElementById("portiondata").value);
+  // add transition to new path
+  g.datum(data).selectAll("path").data(pie).transition().duration(750).attrTween("d", arcTween)
+  // add any new paths
+  g.datum(data).selectAll("path")
+    .data(pie)
+  .enter().append("path")
+    .attr("class","piechart")
+    .attr("fill", function(d,i){ return color(i); })
+    .attr("d", arc)
+    .each(function(d){ this._current = d; })
+
+  if(+document.getElementById("portiondata").value >= maxPortions) {
+    arc = d3.arc()
+    .outerRadius(oRadius*0)
+    .innerRadius(iRadius*0);
+    text = svg.selectAll("text")
+        .attr("class", "error")
+        .text(function(d) {return 'No free desert this week!'});
+  }
+  // remove data not being used
+  g.datum(data).selectAll("path")
+    .data(pie).exit().remove();
+}
+
+render();
+setInterval(render,1500);
+
+function makeData(size, strength){
+  return d3.range(size).map(function(item){
+   return (item*(maxPortions-strength) + (1-item)*strength);
+  });
+};
+// Store the displayed angles in _current.
+// Then, interpolate from _current to the new angles.
+// During the transition, _current is updated in-place by d3.interpolate.
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
 
 </script>
