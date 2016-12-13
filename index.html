@@ -20,11 +20,11 @@
 </head>
 <body>
 <!--start-home-->
-            <div id="header">   
-                <h1>Wast-o-meter<span class="glyphicon glyphicon-scale"></span></h1>
+            <div id="header">
+                <h1>Waste-O-meter</span></h1>
             </div>
             <div id="date">
-                Thursday
+                Wednesday - Week 50
             </div>
     
          <div id="main">    
@@ -38,15 +38,15 @@
                         Wasted food <br>
                         this week
                     </div-->
-                    <div id="price-holder" class="text col-md-4">
+                    <div id="price-holder" class="text col-md-3">
                          
                          <span id="price">0</span>kr 
                          <span class="glyphicon glyphicon glyphicon-piggy-bank" style="vertical-align:-8px"></span>
                      </div>
                      
-                    <div id="number-wasted-portions" class="col-md-4">0</div>
+                    <div id="number-wasted-portions" class="col-md-6">0</div>
 
-                    <div id="weight-holder" class="text col-md-4">
+                    <div id="weight-holder" class="text col-md-3">
                          
                           <span class="glyphicon glyphicon-scale" style="vertical-align:-8px"></span>
                           <span id="weight">0</span>kg
@@ -190,7 +190,7 @@ var maxPortions = 80;
 var width = 960,
     height = 500 - 29; // adjust for height of input bar div
 //var color = d3.scale.category20();
-var color = ['#cb3752','#dee']; //nice color -> #FFcc00
+var color = ['#cb3752','#58b7a7']; //nice color -> #FFcc00
 // draw and append the container
 var svg = d3.select("#donut").append("svg")
   .attr("width", width).attr("height", height);
@@ -198,7 +198,7 @@ var svg = d3.select("#donut").append("svg")
 // set the thickness of the inner and outer radii
 var min = Math.min(width, height);
 var oRadius = min / 2 * 0.9;
-var iRadius = min / 2 * 0;
+var iRadius = min / 2 * 0.7;
 // construct default pie laoyut
 var pie = d3.pie().value(function(d){ return d; }).sort(null);
 // construct arc generator
